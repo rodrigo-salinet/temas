@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Stop</title>
+    <!-- Adicione aqui os links para seus arquivos CSS, se necessário -->
+     <link rel="stylesheet" href="stop.css">
+</head>
+
+<body>
+    <header>
+        <h1>JOGUE STOP</h1>
+    </header>
+
+    <div id="letra-sortida">
+        <!-- Letra sorteada para o jogo -->
+        <h1>A Letra do Stop é...</h1>
+        <p id="letra">A</p>
+        <!-- Botão para sortear uma letra -->
+        <button onclick="sortearLetra()">Sortear Letra</button>
+    </div>
+
+    <main>
+
+        <div id="respostas">
+            <!-- Campos de entrada para as respostas do jogador -->
+            <h2>Respostas</h2>
+
+            <h3>Nome:</h3>
+            <input type="text" id="resposta-nome" placeholder="Coloque sua resposta aqui">
+
+            <h3>Cep:</h3>
+            <input type="text" id="resposta-cep" placeholder="Coloque sua resposta aqui">
+
+            <h3>Comida:</h3>
+            <input type="text" id="resposta-comida" placeholder="Coloque sua resposta aqui">
+
+            <h3>MSÉ:</h3>
+            <input type="text" id="resposta-msé" placeholder="Coloque sua resposta aqui">
+
+            <h3>MNÉ:</h3>
+            <input type="text" id="resposta-mné" placeholder="Coloque sua resposta aqui">
+
+            <h3>Marca:</h3>
+            <input type="text" id="resposta-marca" placeholder="Coloque sua resposta aqui">
+
+            <h3>Cor:</h3>
+            <input type="text" id="resposta-cor" placeholder="Coloque sua resposta aqui">
+            <!-- Adicione mais campos de entrada para outras categorias -->
+        </div>
+
+        <!-- Botão para verificar as respostas -->
+        <button id="verificar" onclick="verificarRespostas()">Verificar</button>
+
+        <div id="resultado">
+            <!-- Resultado do jogo após a verificação -->
+            <h2>Resultado</h2>
+            <p id="resultado-nome"></p>
+            <p id="resultado-cep"></p>
+            <p id="resultado-comida"></p>
+            <p id="resultado-msé"></p>
+            <p id="resultado-mné"></p>
+            <p id="resultado-marca"></p>
+            <p id="resultado-cor"></p>
+            <!-- Adicione mais elementos para outras categorias -->
+        </div>
+    </main>
+
+    <!-- Adicione aqui os links para seus arquivos JavaScript -->
+    <script>
+        var qtdSorteios = 5;
+        var sorteiosRealizados = 0;
+        var TimeoutID; // Variável para armazenar o ID do intervalo
+
+        // Função para sortear uma letra aleatória
+        function sortearLetra() {
+        const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const letraSorteada = letras[Math.floor(Math.random() * letras.length)];
+        document.getElementById('letra').textContent = letraSorteada;
+    
+        sorteiosRealizados++;
+
+         if (sorteiosRealizados >= qtdSorteios) {
+        clearTimeout(TimeoutID);
+        }
+    }
+
+        // Função para iniciar o sorteio
+        function iniciarSorteio() {
+        sorteiosRealizados = 0; // Reinicia o contador de sorteios
+        TimeoutID = setTimeout(sortearLetra, 1000); // Inicia o intervalo
+    }
+
+        // Adicionar um ouvinte de eventos para o botão
+        document.getElementById('botaoEscolherLetra').addEventListener('click', iniciarSorteio);
+
+
+        // Função para verificar as respostas do jogador
+        function verificarRespostas() {
+            const letraSorteada = document.getElementById('letra').textContent;
+            const respostas = {
+                nome: document.getElementById('resposta-nome').value,
+                pais: document.getElementById('resposta-pais').value,
+                fruta: document.getElementById('resposta-fruta').value
+                // Adicione mais categorias conforme necessário
+            };
+
+            document.getElementById('resultado-nome').textContent = `Nome: ${respostas.nome}`;
+            document.getElementById('resultado-pais').textContent = `País: ${respostas.pais}`;
+            document.getElementById('resultado-fruta').textContent = `Fruta: ${respostas.fruta}`;
+            // Adicione mais elementos para outras categorias
+        }
+
+        
+    </script>
+</body>
+
+</html>
+
+
+
+
